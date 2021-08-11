@@ -20,15 +20,15 @@ class SignUpActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-        val button = findViewById<Button>(R.id.sign_in)
+        val button = findViewById<Button>(R.id.updateInfo_button)
         button.setOnClickListener{
             register()
         }
     }
 
     private fun register() {
-        val username = findViewById<TextView>(R.id.editTextTextPersonName).text.toString() + "@gmail.com"
-        val password = findViewById<TextView>(R.id.editTextTextPassword).text.toString()
+        val username = findViewById<TextView>(R.id.person_name).text.toString() + "@gmail.com"
+        val password = findViewById<TextView>(R.id.user_job).text.toString()
         val job = findViewById<TextView>(R.id.whatIDo).text.toString()
         Log.d(username, password)
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(username, password)
@@ -37,8 +37,8 @@ class SignUpActivity: AppCompatActivity() {
                 Log.d("Asd", "yes")
                 val uid  = FirebaseAuth.getInstance().uid!!
                 Log.d("asdddddddddd", uid)
-
                 val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+                Log.d("ref", ref.toString())
                 val user = User(uid, username, job, "https://firebasestorage.googleapis.com/v0/b/messenger-83af0.appspot.com/o/images%2Fimages%2F7020bafa-fa22-11eb-9a03-0242ac130003.png?alt=media&token=3014a64e-03af-43c4-b6c0-f06e9b67b9d6")
                 ref.setValue(user)
                 val intent = Intent(this, LoginActivity::class.java)
@@ -48,4 +48,3 @@ class SignUpActivity: AppCompatActivity() {
 }
 
 
-class User(val uid:String, val nickname:String, val job:String, val photoUrl:String)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".UserSearchActivity"
     android:id="@+id/main_layout"
     android:fitsSystemWindows="true">
 
@@ -53,12 +53,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/Theme.MyTextTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="asd,l;as,dl;as,d;las,d;las,d ;las,d;l a,sdl;, asl;d, asl;d, a;lsd,l;a s,dl;asl a,s;l d,as;ld,as;ld,asl;d, a;lsdmasl;kmdlkasmcdklasmvcklasmvkjoisanvkjoalsnvlkasjnvlkasnvklasnvlkasnvlkasnvlkasnvlkasnvlkasnvlksanvlkasnvklsanvlksanvsnklasknlasvknlsavknlasvklnsavlksavlklnkvaslknvasllnvksalkasvnasvlknasvnlkasvlnkasvnlksavnaklsnvklasnvlkasnvas" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -96,7 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
-        app:hideOnScroll="true"/>
-<!--        app:menu="@menu/app_bar_meu" />-->
+        app:hideOnScroll="true"
+        android:visibility="invisible"/>
+    <!--        app:menu="@menu/app_bar_meu" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

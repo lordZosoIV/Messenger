@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserInfoPageActivity">
+
+    <EditText
+        android:id="@+id/person_name"
+        android:layout_width="300dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/rounded_borders"
+        android:focusable="false"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ems="10"
+
+        android:gravity="center"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        app:layout_constraintBottom_toTopOf="@+id/user_job"
+        app:layout_constraintEnd_toEndOf="@+id/user_select_avatar"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/user_select_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/user_select_avatar"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/user_job"
+        android:layout_width="300dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_borders"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/person_name"
+        app:layout_constraintStart_toStartOf="@+id/person_name"
+        app:layout_constraintTop_toBottomOf="@+id/person_name" />
+
+
+    <Button
+        android:id="@+id/updateInfo_button"
+        android:layout_width="108dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/update"
+        app:backgroundTint="#3F51B5"
+        app:layout_constraintEnd_toEndOf="@+id/user_job"
+        app:layout_constraintStart_toStartOf="@+id/user_job"
+        app:layout_constraintTop_toBottomOf="@+id/user_job" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/user_select_avatar"-->
+<!--        android:layout_width="218dp"-->
+<!--        android:layout_height="201dp"-->
+<!--        android:layout_marginStart="55dp"-->
+<!--        android:layout_marginLeft="55dp"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        android:layout_marginEnd="55dp"-->
+<!--        android:layout_marginRight="55dp"-->
+<!--        android:layout_marginBottom="2dp"-->
+<!--        android:contentDescription="@string/todo"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/person_name"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.479"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_select_avatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/rounded_selected_photo"
+        android:text="@string/select_photo"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:backgroundTint="#D3C5C5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sign_out"
+        android:textColor="#100F0F"
+        app:backgroundTint="#E6DFDF"
+        app:layout_constraintEnd_toEndOf="@+id/updateInfo_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/updateInfo_button"
+        app:layout_constraintTop_toBottomOf="@+id/updateInfo_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
