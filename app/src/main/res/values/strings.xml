@@ -13,4 +13,6 @@
     <string name="select_photo">Select Photo</string>
     <string name="description_text">magariaaaa</string>
     <string name="nickname">nickname</string>
+    <string name="message">"    Message"</string>
+    <string name="message_">" Message"</string>
 </resources>

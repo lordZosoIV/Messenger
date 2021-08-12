@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserSearchActivity"
+    tools:context=".ChatActivity"
     android:id="@+id/main_layout"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="false">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="false">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -19,9 +19,9 @@
             android:layout_height="match_parent"
             android:background="@drawable/ic_launcher_background"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="  SEARCH "
+            app:title="  CHAT "
             app:contentScrim="@color/purple_500"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="false">
 
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -55,7 +55,9 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_weight="7"
+        android:paddingBottom="50dp">
 
 
         <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -67,7 +69,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/searched_users"
+            android:id="@+id/user_to_user_chat_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -77,15 +79,41 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <EditText
+        android:id="@+id/text_for_send"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_borders"
+        android:ems="10"
+        android:paddingLeft="10dp"
+        android:hint="@string/message_"
+        android:inputType="textPersonName"
+        app:layout_anchor="@+id/bottomAppbar"
+        app:layout_anchorGravity="bottom|center"
+        android:paddingStart="10dp"
+        tools:ignore="RtlSymmetry" />
+
+
+    <Button
+        android:id="@+id/send_button_chat_log"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/message_send"
+        app:backgroundTint="@color/black"
+        app:layout_anchor="@+id/text_for_send"
+        app:layout_anchorGravity="right|bottom" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_weight="1"
         android:id="@+id/bottomAppbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
-        app:hideOnScroll="true"
         android:visibility="invisible"/>
+
+
+
     <!--        app:menu="@menu/app_bar_meu" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

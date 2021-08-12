@@ -4,11 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -26,6 +26,11 @@ class UserSearchActivity : AppCompatActivity() {
         Log.d("Asd", "yba")
         fetchUsers()
 
+        findViewById<Button>(R.id.back).setOnClickListener{
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun fetchUsers() {
@@ -41,6 +46,13 @@ class UserSearchActivity : AppCompatActivity() {
                     adapter.add(UserItem(user))
                 }
 
+                adapter.setOnItemClickListener{ item, view->
+                    val intent = Intent(view.context, ChatActivity::class.java)
+                    val targetUser = item as UserItem
+                    intent.putExtra(TARGET_USER, targetUser.user)
+                    startActivity(intent)
+                }
+
                 findViewById<RecyclerView>(R.id.searched_users).adapter = adapter
             }
 
@@ -48,6 +60,10 @@ class UserSearchActivity : AppCompatActivity() {
                 Log.d("error", "database error on fetching users for search")
             }
         })
+    }
+
+    companion object{
+        val TARGET_USER = "TARGET_USER"
     }
 }
 
@@ -60,7 +76,7 @@ class UserItem(val user: User): Item<GroupieViewHolder>() {
     }
 
     override fun getLayout(): Int {
-        return R.layout.user_search_raw
+        return R.layout.user_search_row
     }
 }
 

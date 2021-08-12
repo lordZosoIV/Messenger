@@ -5,6 +5,11 @@ plugins {
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+
+androidExtensions{
+    experimental = true
+}
 
 android {
     compileSdkVersion 30

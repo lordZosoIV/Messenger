@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 //                    }
                     return@addOnCompleteListener
                 } //failure. else is successful
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)
             }
     }

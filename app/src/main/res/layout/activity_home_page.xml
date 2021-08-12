@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".HomePageActivity"
     android:id="@+id/main_layout"
     android:fitsSystemWindows="true">
 
@@ -46,20 +46,19 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_weight="7"
+        android:paddingBottom="50dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <TextView
-                style="@style/Theme.MyTextTheme"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searched_users"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="asd,l;as,dl;as,d;las,d;las,d ;las,d;l a,sdl;, asl;d, asl;d, a;lsd,l;a s,dl;asl a,s;l d,as;ld,as;ld,asl;d, a;lsdmasl;kmdlkasmcdklasmvcklasmvkjoisanvkjoalsnvlkasjnvlkasnvklasnvlkasnvlkasnvlkasnvlkasnvlkasnvlksanvlkasnvklsanvlksanvsnklasknlasvknlsavknlasvklnsavlksavlklnkvaslknvasllnvksalkasvnasvlknasvnlkasvlnkasvnlksavnaklsnvklasnvlkasnvas" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_anchor="@+id/nestedScrollView"
+                app:layout_anchorGravity="center"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.core.widget.NestedScrollView>
 
     <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,14 +69,7 @@
          android:layout_margin="16dp"/>-->
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searched_users"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_anchor="@+id/nestedScrollView"
-        app:layout_anchorGravity="center"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_button"

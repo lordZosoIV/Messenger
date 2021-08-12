@@ -41,7 +41,7 @@ class SignUpActivity: AppCompatActivity() {
                 Log.d("ref", ref.toString())
                 val user = User(uid, username, job, "https://firebasestorage.googleapis.com/v0/b/messenger-83af0.appspot.com/o/images%2Fimages%2F7020bafa-fa22-11eb-9a03-0242ac130003.png?alt=media&token=3014a64e-03af-43c4-b6c0-f06e9b67b9d6")
                 ref.setValue(user)
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)
             }
     }
