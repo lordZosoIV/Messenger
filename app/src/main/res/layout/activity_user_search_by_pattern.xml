@@ -19,7 +19,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/ic_launcher_background"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="  SEARCH "
             app:contentScrim="@color/purple_500"
             android:fitsSystemWindows="true">
 
@@ -37,14 +36,52 @@
                 android:layout_height="40dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/back"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin"
+                android:layout_marginBottom="10dp"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/app_bar_meu"/>
+                app:menu="@menu/bottom_bar_items"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="bottom"
+                app:layout_collapseMode="pin"
+                android:orientation="horizontal"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="10dp">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/search_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/rounded_borders"
+                    android:gravity="center|left"
+                    android:hint="@string/home_page_search_messages"
+                    android:imeOptions="actionDone"
+                    android:inputType="textMultiLine"
+                    android:selectAllOnFocus="true"
+                    android:layout_gravity="center"
+                    android:windowSoftInputMode="stateHidden"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/search_btn"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/search_btn"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="RtlHardcoded" />
+            </RelativeLayout >
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

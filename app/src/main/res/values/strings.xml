@@ -15,4 +15,6 @@
     <string name="nickname">nickname</string>
     <string name="message">"    Message"</string>
     <string name="message_">" Message"</string>
+    <string name="search">"  Search"</string>
+    <string name="home_page_search_messages">"         Search"</string>
 </resources>

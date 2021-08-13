@@ -39,7 +39,13 @@ class ChatActivity : AppCompatActivity() {
         setUpMessageSending()
 
         findViewById<Button>(R.id.back).setOnClickListener{
-            val intent = Intent(this, UserSearchActivity::class.java)
+            val prev = intent.getStringExtra("PREV_ACTIVITY")
+            val c = if(prev == HomePageActivity.ACTIVITY){
+                HomePageActivity::class.java
+            }else{
+                UserSearchActivity::class.java
+            }
+            val intent = Intent(this, c)
             startActivity(intent)
         }
 

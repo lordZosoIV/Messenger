@@ -19,7 +19,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/gradient_background"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Grevillea juniperina"
             app:contentScrim="@color/purple_500"
             android:fitsSystemWindows="true">
 
@@ -27,7 +26,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/background"
+                android:background="@drawable/ic_launcher_background"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"/>
 
@@ -35,31 +34,51 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="bottom"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/app_bar_meu"/>
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/search_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/rounded_borders"
+                    android:gravity="center|left"
+                    android:hint="@string/home_page_search_messages"
+                    android:imeOptions="actionDone"
+                    android:inputType="textMultiLine"
+                    android:selectAllOnFocus="true"
+                    android:layout_gravity="center"
+                    android:windowSoftInputMode="stateHidden"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/search_btn"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/search_btn"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="RtlHardcoded" />
+            </RelativeLayout >
+
+
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_weight="7"
-        android:paddingBottom="50dp">
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/searched_users"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_anchor="@+id/nestedScrollView"
-                app:layout_anchorGravity="center"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </androidx.core.widget.NestedScrollView>
 
     <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
          android:layout_width="wrap_content"
@@ -69,26 +88,72 @@
          android:layout_margin="16dp"/>-->
 
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:paddingTop="50dp"
+        android:paddingBottom="50dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searched_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_anchor="@+id/nestedScrollView"
+            app:layout_anchorGravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:reverseLayout="true" />
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         app:backgroundTint="@android:color/holo_blue_dark"
         app:layout_anchor="@+id/bottomAppbar"
         android:src="@drawable/plus"
         app:layout_anchorGravity="top|center"
         app:rippleColor="@android:color/holo_blue_bright" />
 
+    <Button
+        android:id="@+id/home_btn"
+        android:icon="@drawable/home"
+        app:showAsAction="ifRoom"
+        android:background="@drawable/home"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="15dp"
+        app:backgroundTint="@color/black"
+        android:layout_gravity="bottom|left"
+        tools:ignore="RtlHardcoded" />
+
+
+    <Button
+        android:id="@+id/settings"
+        app:showAsAction="ifRoom"
+        android:background="@drawable/settings"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:backgroundTint="@color/black"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="bottom|right"
+        tools:ignore="RtlHardcoded" />
+
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
-        app:hideOnScroll="true"/>
-<!--        app:menu="@menu/app_bar_meu" />-->
+        app:hideOnScroll="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

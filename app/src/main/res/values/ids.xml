@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="search_text" type="id" />
+    <item name="home_btn" type="id" />
+    <item name="settings" type="id" />
+    <item name="sign_out_button" type="id" />
+</resources>
