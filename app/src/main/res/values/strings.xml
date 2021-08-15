@@ -17,4 +17,8 @@
     <string name="message_">" Message"</string>
     <string name="search">"  Search"</string>
     <string name="home_page_search_messages">"         Search"</string>
+    <string name="chat_nickname" />
+    <string name="search_">Search</string>
+    <string name="_message_">Message</string>
+    <string name="search__">Search</string>
 </resources>

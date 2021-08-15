@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.shashank.sony.fancytoastlib.FancyToast
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -27,13 +29,18 @@ import kotlin.collections.HashMap
 @Suppress("UNCHECKED_CAST")
 class UserSearchActivity : AppCompatActivity() {
     val adapter = GroupAdapter<GroupieViewHolder>()
+    var me = ""
+
     @SuppressLint("ClickableViewAccessibility")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_search_by_pattern)
-        Log.d("Asd", "yba")
+
+        me = FirebaseAuth.getInstance().uid.toString()
+        Loader().goLive(findViewById<ProgressBar>(R.id.progressBar))
+
         fetchUsers()
 
         findViewById<Button>(R.id.back).setOnClickListener {
@@ -42,30 +49,20 @@ class UserSearchActivity : AppCompatActivity() {
         }
 
 
-        findViewById<TextView>(R.id.search_text).setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                findViewById<BottomAppBar>(R.id.bottomAppbar).visibility = View.INVISIBLE
-
-                val pattern = findViewById<TextView>(R.id.search_text).text.toString()
-                if (pattern.length > 3) {
-                    Log.d("pattern", pattern)
-                }
-                return v?.onTouchEvent(event) ?: true
-            }
-        })
-
-
         findViewById<TextView>(R.id.search_text).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int,
+            ) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int,
+            ) {
                 val pattern = findViewById<TextView>(R.id.search_text).text.toString()
                 if (pattern.length > 3) {
-                    Log.d("pattern", pattern)
                     fetchUserByPattern(pattern)
                 }
             }
@@ -76,16 +73,27 @@ class UserSearchActivity : AppCompatActivity() {
 
     private fun fetchUserByPattern(pattern: String) {
         adapter.clear()
+        Loader().goLive(findViewById<ProgressBar>(R.id.progressBar))
         val q = FirebaseDatabase.getInstance().getReference("/users")
+        val c = this
 
         q.addListenerForSingleValueEvent(object : ValueEventListener {
+            var exists = false
             override fun onDataChange(datasnapshot: DataSnapshot) {
                 datasnapshot.children.forEach {
                     val user = User(it.value as HashMap<String, String>)
-                    if(user.nickname.startsWith(pattern)){
+                    if (user.uid != me && user.nickname.startsWith(pattern)) {
                         adapter.add(UserItem(user))
+                        exists = true
+                        Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
                     }
                 }
+
+//                if(!exists){
+//                    FancyToast.makeText(c,"No Such User", FancyToast.LENGTH_LONG, FancyToast.INFO,false).show()
+//                }else{
+//                    FancyToast.makeText(c,"No Such User", FancyToast.LENGTH_LONG, FancyToast.INFO,false).cancel()
+//                }
 
                 adapter.setOnItemClickListener { item, view ->
                     val intent = Intent(view.context, ChatActivity::class.java)
@@ -94,8 +102,6 @@ class UserSearchActivity : AppCompatActivity() {
                     intent.putExtra(PREV_ACTIVITY, ACTIVITY)
                     startActivity(intent)
                 }
-
-
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -107,14 +113,32 @@ class UserSearchActivity : AppCompatActivity() {
     private fun fetchUsers() {
         adapter.clear()
         val ref = FirebaseDatabase.getInstance().getReference("/users")
+        val c = this
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
-
+            var exists = false
             override fun onDataChange(p0: DataSnapshot) {
-
                 p0.children.forEach {
                     Log.d("NewMessage", it.toString())
                     val user = User(it.value as HashMap<String, String>)
-                    adapter.add(UserItem(user))
+                    if (user.uid != me) {
+                        adapter.add(UserItem(user))
+                        exists = true
+                    }
+                    Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
+                }
+
+                if (!exists) {
+                    FancyToast.makeText(c,
+                        "No Users",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.INFO,
+                        false).show()
+                } else {
+                    FancyToast.makeText(c,
+                        "No Users",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.INFO,
+                        false).cancel()
                 }
 
                 adapter.setOnItemClickListener { item, view ->
@@ -144,9 +168,12 @@ class UserSearchActivity : AppCompatActivity() {
 
 class UserItem(val user: User) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.nickname_raw_search).text = user.nickname.substring(0, user.nickname.indexOf('@', 0, false))
+        viewHolder.itemView.findViewById<TextView>(R.id.nickname_raw_search).text =
+            user.nickname.substring(0, user.nickname.indexOf('@', 0, false))
         viewHolder.itemView.findViewById<TextView>(R.id.job_raw_search).text = user.job
-        Glide.with(viewHolder.itemView.findViewById<TextView>(R.id.user_search_raw_avatar)).load(user.photoUrl).into(viewHolder.itemView.findViewById<ImageView>(R.id.user_search_raw_avatar))
+        Glide.with(viewHolder.itemView.findViewById<TextView>(R.id.user_search_raw_avatar))
+            .load(user.photoUrl)
+            .into(viewHolder.itemView.findViewById<ImageView>(R.id.user_search_raw_avatar))
     }
 
     override fun getLayout(): Int {

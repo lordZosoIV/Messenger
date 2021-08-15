@@ -4,6 +4,8 @@ package ge.lordzoso.messenger
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -12,10 +14,14 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.view.menu.ActionMenuItemView
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -35,16 +41,30 @@ class UserInfoPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info_page)
+        Loader().goLive(findViewById<ProgressBar>(R.id.progressBar))
         uid = FirebaseAuth.getInstance().uid!!
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         initView(uid, ref)
         handleSignOut()
         handleUserInfoUpdate(uid, ref)
         setUpImageView()
-//        findViewById<Button>(R.id.user_select_avatar).setOnClickListener{
-//            getContent.launch("image/*")
-//        }
+        bottomBarHandle()
+    }
 
+    private fun bottomBarHandle() {
+
+        findViewById<FloatingActionButton>(R.id.fab_button).setOnClickListener{
+            val intent = Intent(this, UserSearchActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        findViewById<BottomAppBar>(R.id.bottomAppbar).setNavigationOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+
+//        findViewById<ActionMenuItemView>(R.id.settings)?.color
 
     }
 
@@ -70,9 +90,12 @@ class UserInfoPageActivity : AppCompatActivity() {
 
     private fun handleUserInfoUpdate(uid:String, ref: DatabaseReference) {
         findViewById<Button>(R.id.updateInfo_button).setOnClickListener{
+            Loader().goLive(findViewById<ProgressBar>(R.id.progressBar))
             job = findViewById<TextView>(R.id.user_job).text.toString()
             val user = User(uid, nickname + "@gmail.com", job, photoUrl)
-            ref.setValue(user)
+            ref.setValue(user).addOnSuccessListener {
+                Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
+            }
         }
     }
 
@@ -97,12 +120,13 @@ class UserInfoPageActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.user_job).text = job
             Glide.with(this).load(photoUrl).into(findViewById(R.id.user_select_avatar));
             Log.d(job, nickname)
+            Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
         }
     }
 
     private fun uploadImageToFirebaseStorage() {
         if (selectedPhotoUri == null) return
-
+        Loader().goLive(findViewById<ProgressBar>(R.id.progressBar))
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
 
@@ -130,9 +154,11 @@ class UserInfoPageActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("1", "Finally we saved the user to Firebase Database")
+                Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
             }
             .addOnFailureListener {
                 Log.d("2", "Failed to set value to database: ${it.message}")
+                Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
             }
     }
 

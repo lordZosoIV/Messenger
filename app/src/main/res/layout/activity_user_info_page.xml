@@ -104,4 +104,55 @@
         app:layout_constraintStart_toStartOf="@+id/updateInfo_button"
         app:layout_constraintTop_toBottomOf="@+id/updateInfo_button" />
 
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".HomePageActivity"
+            android:id="@+id/main_layout"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/todo"
+                app:backgroundTint="@android:color/holo_blue_dark"
+                app:layout_anchor="@+id/bottomAppbar"
+                android:src="@drawable/plus"
+                app:layout_anchorGravity="top|center"
+                app:rippleColor="@android:color/holo_blue_bright" />
+
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottomAppbar"
+                android:layout_gravity="bottom"
+                app:fabAlignmentMode="center"
+                app:hideOnScroll="true"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:menu="@menu/bottom_bar_items"
+                app:navigationIcon="@drawable/home"
+                />
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="200dp"
+                android:layout_gravity="center_horizontal"
+                >
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_marginTop="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center_horizontal"
+                    android:progressDrawable="@drawable/circular_progress_bar" />
+            </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

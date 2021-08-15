@@ -28,19 +28,21 @@ class SignUpActivity: AppCompatActivity() {
 
     private fun register() {
         val username = findViewById<TextView>(R.id.person_name).text.toString() + "@gmail.com"
-        val password = findViewById<TextView>(R.id.user_job).text.toString()
-        val job = findViewById<TextView>(R.id.whatIDo).text.toString()
-        Log.d(username, password)
+        var password = findViewById<TextView>(R.id.user_job).text.toString()
+        var job = findViewById<TextView>(R.id.whatIDo).text.toString()
+        if(password.isEmpty()) password = "error"
+        if(job.isEmpty()) job = "error"
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(username, password)
             .addOnCompleteListener {
                 if(!it.isSuccessful) return@addOnCompleteListener //failure. else is successful.
-                Log.d("Asd", "yes")
                 val uid  = FirebaseAuth.getInstance().uid!!
-                Log.d("asdddddddddd", uid)
                 val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
                 Log.d("ref", ref.toString())
-                val user = User(uid, username, job, "https://firebasestorage.googleapis.com/v0/b/messenger-83af0.appspot.com/o/images%2Fimages%2F7020bafa-fa22-11eb-9a03-0242ac130003.png?alt=media&token=3014a64e-03af-43c4-b6c0-f06e9b67b9d6")
-                ref.setValue(user)
+                var user = User(uid, username, job, "https://firebasestorage.googleapis.com/v0/b/messenger-83af0.appspot.com/o/images%2F004bf43a-fd5e-11eb-9a03-0242ac130003.png?alt=media&token=d1ec4322-7f3f-4485-9bf6-f56ebca09078")
+                ref.setValue(user).addOnFailureListener{
+                    user = User(uid, username, job,
+                        "https://myhero.com/images/guest/g289564/hero111025/batman%202.jpg")
+                }
                 val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)
             }

@@ -2,11 +2,11 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity"
-    android:id="@+id/main_layout"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="false"
+    tools:context=".ChatActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,34 +17,83 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_launcher_background"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="  CHAT "
-            app:contentScrim="@color/purple_500"
-            android:fitsSystemWindows="false">
-
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/gradient_background"
-                app:layout_collapseMode="parallax" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/back"
-                app:layout_collapseMode="pin"/>
+            android:background="@android:color/holo_blue_dark"
+            android:fitsSystemWindows="false"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="76dp"
+                app:layout_collapseMode="pin" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="10dp"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/bottom_bar_items"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="40dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/back"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="RtlHardcoded" />
+
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chat_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:text="magarikaci"
+                    android:textColor="@color/white"
+                    android:textSize="32sp"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="RtlHardcoded" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/chat_job"
+                    android:layout_width="100dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginLeft="60dp"
+                    android:text="windows10"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="RtlHardcoded" />
+
+            </RelativeLayout>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/chat_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|right"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:layout_collapseMode="pin"
+                tools:ignore="RtlHardcoded" />
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -55,9 +104,10 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_weight="7"
-        android:paddingBottom="50dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="50dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -83,35 +133,56 @@
         android:id="@+id/text_for_send"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:autofillHints=""
         android:background="@drawable/rounded_borders"
         android:ems="10"
+        android:hint="@string/_message_"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
+        android:paddingStart="20dp"
         android:paddingLeft="10dp"
-        android:hint="@string/message_"
-        android:inputType="textPersonName"
+        android:paddingEnd="45dp"
+        android:selectAllOnFocus="true"
         app:layout_anchor="@+id/bottomAppbar"
         app:layout_anchorGravity="bottom|center"
-        android:paddingStart="10dp"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlCompat,RtlSymmetry" />
 
 
     <Button
         android:id="@+id/send_button_chat_log"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:background="@drawable/message_send"
         app:backgroundTint="@color/black"
         app:layout_anchor="@+id/text_for_send"
         app:layout_anchorGravity="right|bottom" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:layout_weight="1"
         android:id="@+id/bottomAppbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
-        app:fabAlignmentMode="center"
-        android:visibility="invisible"/>
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:fabAlignmentMode="center" />
 
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center_horizontal"
+        >
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_marginTop="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center_horizontal"
+            android:progressDrawable="@drawable/circular_progress_bar" />
+    </LinearLayout>
 
 
     <!--        app:menu="@menu/app_bar_meu" />-->
