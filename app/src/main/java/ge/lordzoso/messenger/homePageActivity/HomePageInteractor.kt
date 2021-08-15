@@ -12,6 +12,7 @@ import android.view.View
 import com.xwray.groupie.Item
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import ge.lordzoso.messenger.chatPage.ChatActivity
+import java.util.Collections.list
 
 @Suppress("UNCHECKED_CAST")
 class HomePageInteractor(activity: HomePageActivity) {
@@ -68,6 +69,7 @@ class HomePageInteractor(activity: HomePageActivity) {
                 val message = dataSnapshot.getValue(Message::class.java) ?: return
                 latestMessagesMap[dataSnapshot.key!!] = message
                 refreshRecyclerViewMessages(message)
+//                uniq.clear()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -77,34 +79,10 @@ class HomePageInteractor(activity: HomePageActivity) {
         })
 
     }
+    val uniq = HashMap<String, Int>()
 
     private fun refreshRecyclerViewMessages(message: Message) {
-        view.clearAdapter()
-        latestMessagesMap.values.forEach {
-
-            val currentUser = FirebaseAuth.getInstance().uid!!
-            val uid = if (currentUser == message.from) {
-                message.to
-            } else {
-                message.from
-            }
-            val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-            ref.addListenerForSingleValueEvent(object : ValueEventListener {
-                @SuppressLint("CheckResult")
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val user = snapshot.getValue(User::class.java)!!
-                    view.adapterAdd(LatestMessageRow(it, user))
-                    view.adapterSetListener(currentUser)
-                    view.sleep()
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    view.sleep()
-                }
-
-            })
-
-        }
+        view.refreshRecyclerViewMessages(latestMessagesMap)
     }
 
     fun onRowItemClick(item: Item<GroupieViewHolder>, v: View) {
@@ -149,12 +127,16 @@ class HomePageInteractor(activity: HomePageActivity) {
                 val chatMessage = p0.getValue(Message::class.java) ?: return
                 latestMessagesMap[p0.key!!] = chatMessage
                 refreshRecyclerViewMessages(chatMessage)
+//                uniq.clear()
+
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
                 val chatMessage = p0.getValue(Message::class.java) ?: return
                 latestMessagesMap[p0.key!!] = chatMessage
                 refreshRecyclerViewMessages(chatMessage)
+//                uniq.clear()
+
             }
 
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {

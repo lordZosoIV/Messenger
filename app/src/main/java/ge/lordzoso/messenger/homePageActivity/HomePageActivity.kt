@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -26,6 +27,7 @@ import com.xwray.groupie.Item
 import de.hdodenhof.circleimageview.CircleImageView
 import ge.lordzoso.messenger.R
 import ge.lordzoso.messenger.UserSearchActivity
+import ge.lordzoso.messenger.chatPage.ChatActivity
 import ge.lordzoso.messenger.model.Loader
 import ge.lordzoso.messenger.model.Message
 import ge.lordzoso.messenger.model.User
@@ -132,6 +134,40 @@ class HomePageActivity : AppCompatActivity(), IHomePageActivityView {
 
     }
 
+
+    override fun refreshRecyclerViewMessages(latestMessagesMap:HashMap<String, Message>) {
+        adapter.clear()
+        Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
+        latestMessagesMap.values.forEach {
+            adapter.add(LatestMessageRow(it))
+            adapter.setOnItemClickListener { item, view ->
+                val intent = Intent(view.context, ChatActivity::class.java)
+                val singleItem = item as LatestMessageRow
+                val currentUser = FirebaseAuth.getInstance().uid!!
+                val uid = if (currentUser == singleItem.message.from) {
+                    singleItem.message.to
+                } else {
+                    singleItem.message.from
+                }
+                val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+                ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                    @SuppressLint("CheckResult")
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val targetUser = snapshot.getValue(User::class.java)!!
+                        intent.putExtra(TARGET_USER, targetUser)
+                        intent.putExtra(PREV_ACTIVITY, ACTIVITY)
+                        startActivity(intent)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+
+                })
+            }
+        }
+    }
+
     private fun searchUserChat() {
         findViewById<TextView>(R.id.search_text).setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
@@ -184,7 +220,7 @@ class HomePageActivity : AppCompatActivity(), IHomePageActivityView {
 }
 
 
-class LatestMessageRow(val message: Message, val user: User) :
+class LatestMessageRow(val message: Message) :
     Item<GroupieViewHolder>() {
     override fun getLayout(): Int {
         return R.layout.latest_message_row
@@ -193,24 +229,41 @@ class LatestMessageRow(val message: Message, val user: User) :
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.new_message_nickname).text =
-            user.nickname.substring(
-                0, user.nickname.indexOf(
-                    '@',
-                    0,
-                    false
-                )
-            )
-        viewHolder.itemView.findViewById<TextView>(R.id.new_message_msg).text = message.text
-        Glide.with(viewHolder.itemView.findViewById<CircleImageView>(R.id.new_message_avatar))
-            .load(
-                user.photoUrl
-            ).into(viewHolder.itemView.findViewById(R.id.new_message_avatar))
-        val time = Utils().getTimeAgo(message.time)
-        viewHolder.itemView.findViewById<TextView>(R.id.new_message_time).text =
-            time.toString()
+        val currentUser = FirebaseAuth.getInstance().uid!!
+        val uid = if (currentUser == message.from) {
+            message.to
+        } else {
+            message.from
+        }
 
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            @SuppressLint("CheckResult")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val user = snapshot.getValue(User::class.java)!!
+                viewHolder.itemView.findViewById<TextView>(R.id.new_message_nickname).text =
+                    user.nickname.substring(
+                        0, user.nickname.indexOf(
+                            '@',
+                            0,
+                            false
+                        )
+                    )
+                viewHolder.itemView.findViewById<TextView>(R.id.new_message_msg).text = message.text
+                Glide.with(viewHolder.itemView.findViewById<CircleImageView>(R.id.new_message_avatar))
+                    .load(
+                        user.photoUrl
+                    ).into(viewHolder.itemView.findViewById(R.id.new_message_avatar))
+                val time = Utils().getTimeAgo(message.time)
+                viewHolder.itemView.findViewById<TextView>(R.id.new_message_time).text =
+                    time.toString()
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+//        viewHolder.itemView.findViewById<TextView>(R.id.new_message_msg).text = chatMessage.text
     }
 
 }
