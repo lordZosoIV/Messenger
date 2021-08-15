@@ -11,7 +11,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/activityHomepgH"
         android:background="@drawable/ic_background"
         android:fitsSystemWindows="true">
 
@@ -34,16 +34,16 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="@dimen/activityHomepgtbH"
                 app:layout_collapseMode="pin" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/activityHomepgRlml"
+                android:layout_marginRight="@dimen/activityHomepgrlmr"
+                android:layout_marginBottom="@dimen/activityHomepgrlmb"
                 android:orientation="horizontal"
                 app:layout_collapseMode="pin">
 
@@ -57,7 +57,7 @@
                     android:hint="@string/search_"
                     android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:paddingStart="40dp"
+                    android:paddingStart="@dimen/activityHomepgsearchps"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:windowSoftInputMode="stateHidden"
@@ -66,11 +66,11 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/search_btn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="@dimen/activityHomepgsbtnW"
+                    android:layout_height="@dimen/activityHomepgsbtrnH"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="@dimen/activityHomepgsbtnMl"
+                    android:layout_marginTop="@dimen/activityHomepgsbtnmt"
                     android:background="@drawable/search_btn"
                     app:layout_collapseMode="pin"
                     tools:ignore="RtlHardcoded" />
@@ -94,8 +94,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="7"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
+        android:paddingTop="@dimen/activityHomepgnspt"
+        android:paddingBottom="@dimen/activityHomepgnspb"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
@@ -136,17 +136,17 @@
         />
 
     <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="@dimen/activityHomepglinearwi"
+        android:layout_height="@dimen/activityHomepglieanrhe"
+        android:layout_marginTop="@dimen/activityHomepglinearmarT"
         android:layout_gravity="center_horizontal"
         >
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
-            android:layout_marginTop="50dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/pbTop"
+            android:layout_width="@dimen/pbW"
+            android:layout_height="@dimen/pbH"
             android:gravity="center_horizontal"
             android:progressDrawable="@drawable/circular_progress_bar" />
     </LinearLayout>

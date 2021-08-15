@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="100dp"
-    android:paddingRight="100dp"
-    android:paddingTop="100dp"
+    android:paddingLeft="@dimen/loadingpl"
+    android:paddingRight="@dimen/loadingpr"
+    android:paddingTop="@dimen/loadingpt"
         tools:context=".mainPage.MainActivity"
     android:paddingBottom="100dp" >
 <!--    tools:context=".MainActivity">-->
@@ -13,8 +13,8 @@
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/loadingpbW"
+        android:layout_height="@dimen/loadingpbH"
         android:id="@+id/progressBar"
         android:progressDrawable="@drawable/circular_progress_bar"
         android:layout_alignParentBottom="true" />

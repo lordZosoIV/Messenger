@@ -75,6 +75,7 @@ class UserSearchActivity : AppCompatActivity(), IUserSearchByPatternView {
                 before: Int, count: Int,
             ) {
                 val pattern = findViewById<TextView>(R.id.search_text).text.toString()
+                adapter.clear()
                 if (pattern.length > 3) {
                     fetchUserByPatternListener(pattern)
                 }

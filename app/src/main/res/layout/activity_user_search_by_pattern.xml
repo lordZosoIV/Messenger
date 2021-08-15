@@ -11,7 +11,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/usersbpappbarH"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,27 +34,27 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="@dimen/usersbptoolbarlH"
                 app:layout_collapseMode="pin" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="center"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/usersbpmatchpml"
+                android:layout_marginTop="@dimen/usersbpmatchpmt"
+                android:layout_marginRight="@dimen/usersbpmatchpml"
+                android:layout_marginBottom="@dimen/usersbpmatchpmb"
                 app:layout_collapseMode="pin">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/back"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/usersbpbackw"
+                    android:layout_height="@dimen/usersbpbackh"
                     android:layout_gravity="left"
                     android:background="@drawable/back"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="@dimen/usersbpbackmt"
                     app:layout_collapseMode="pin"
                     tools:ignore="RtlHardcoded" />
 
@@ -65,10 +65,10 @@
                     android:layout_gravity="center"
                     android:background="@drawable/rounded_borders"
                     android:gravity="center|left"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="@dimen/usersbpsrchml"
+                    android:layout_marginRight="@dimen/usersbpsrchmr"
                     android:hint="@string/search__"
-                    android:paddingStart="40dp"
+                    android:paddingStart="@dimen/usersbpsrchS"
                     android:imeOptions="actionDone"
                     android:inputType="textMultiLine"
                     android:selectAllOnFocus="true"
@@ -78,15 +78,15 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/search_btn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="@dimen/usersbpsrchbtnW"
+                    android:layout_height="@dimen/usersbpsrchbtnH"
                     android:layout_gravity="center"
-                    android:layout_marginStart="52dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="18dp"
-                    android:layout_marginRight="18dp"
-                    android:layout_marginBottom="18dp"
+                    android:layout_marginStart="@dimen/usersbpsrchbrtnms"
+                    android:layout_marginLeft="@dimen/usersbpsrchbtnml"
+                    android:layout_marginTop="@dimen/usersbpsrchbtnmt"
+                    android:layout_marginEnd="@dimen/usersbpsrchbrtnme"
+                    android:layout_marginRight="@dimen/usersbpsrchbrnmr"
+                    android:layout_marginBottom="@dimen/usersbpsrchbrnmb"
                     android:background="@drawable/search_btn"
                     app:layout_collapseMode="pin"
                     tools:ignore="RtlHardcoded" />
@@ -134,17 +134,17 @@
         android:visibility="invisible"/>
 
     <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="@dimen/usersbpbliw"
+        android:layout_height="@dimen/usersbpblih"
+        android:layout_marginTop="@dimen/usersbpbtmlimt"
         android:layout_gravity="center_horizontal"
         >
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
-            android:layout_marginTop="50dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/pbTop"
+            android:layout_width="@dimen/pbW"
+            android:layout_height="@dimen/pbH"
             android:gravity="center_horizontal"
             android:progressDrawable="@drawable/circular_progress_bar" />
     </LinearLayout>

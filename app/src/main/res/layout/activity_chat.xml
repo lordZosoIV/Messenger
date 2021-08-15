@@ -10,7 +10,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/actH"
         android:fitsSystemWindows="false">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -24,28 +24,28 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="@dimen/ToolBarH"
                 app:layout_collapseMode="pin" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/RLP"
+                android:layout_marginTop="@dimen/RLT"
+                android:layout_marginRight="@dimen/RLR"
+                android:layout_marginBottom="@dimen/RLB"
                 app:layout_collapseMode="pin"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="40dp">
+                android:layout_marginStart="@dimen/RLMargStart"
+                android:layout_marginEnd="@dimen/RLMargEnd">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/back"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/activityChatbackW"
+                    android:layout_height="@dimen/activityChatBackH"
                     android:layout_gravity="left"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="@dimen/activityChatBackMargTop"
                     android:background="@drawable/back"
                     app:layout_collapseMode="pin"
                     tools:ignore="RtlHardcoded" />
@@ -57,25 +57,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="20dp"
-                    android:text="magarikaci"
+                    android:layout_marginLeft="@dimen/activityChatkacimarginLEft"
+                    android:layout_marginTop="@dimen/activityChatkaciLeftTop"
+                    android:layout_marginRight="@dimen/activityChatmagarikaciMargiR"
+                    android:text="@string/magarikaciTest"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
+                    android:textSize="@dimen/activityChatTextkcSize"
                     app:layout_collapseMode="pin"
                     tools:ignore="RtlHardcoded" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/chat_job"
-                    android:layout_width="100dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="45dp"
-                    android:layout_marginLeft="60dp"
-                    android:text="windows10"
+                    android:layout_width="@dimen/activityChatjobW"
+                    android:layout_height="@dimen/activityChatjopbH"
+                    android:layout_marginTop="@dimen/activityChatjobMargTop"
+                    android:layout_marginLeft="@dimen/activityChatjobMl"
                     android:textColor="@color/white"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/activityChatjobtxtsize"
                     app:layout_collapseMode="pin"
                     tools:ignore="RtlHardcoded" />
 
@@ -84,15 +83,15 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/chat_photo"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/activityChatPtW"
+                android:layout_height="@dimen/activityChatptH"
                 android:layout_gravity="center|right"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="60dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/activityChatptml"
+                android:layout_marginRight="@dimen/activityChatptmr"
+                android:layout_marginBottom="@dimen/activityChatptmb"
+                android:layout_marginTop="@dimen/activityChatptmt"
                 android:textColor="@color/white"
-                android:textSize="13sp"
+                android:textSize="@dimen/activityChatpttxt"
                 app:layout_collapseMode="pin"
                 tools:ignore="RtlHardcoded" />
 
@@ -105,18 +104,10 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="7"
-        android:paddingTop="10dp"
-        android:paddingBottom="50dp"
+        android:paddingTop="@dimen/activityChatns1"
+        android:paddingBottom="@dimen/activityChatns2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-        <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         app:layout_anchor="@id/collapsing_toolbar"
-         app:layout_anchorGravity="end|bottom"
-         android:layout_margin="16dp"/>-->
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -133,16 +124,16 @@
     <EditText
         android:id="@+id/text_for_send"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/activityChatsendH"
         android:autofillHints=""
         android:background="@drawable/rounded_borders"
         android:ems="10"
         android:hint="@string/_message_"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine"
-        android:paddingStart="20dp"
-        android:paddingLeft="10dp"
-        android:paddingEnd="45dp"
+        android:paddingStart="@dimen/activityChatsendS"
+        android:paddingLeft="@dimen/activityChatSl"
+        android:paddingEnd="@dimen/activityChatSE"
         android:selectAllOnFocus="true"
         app:layout_anchor="@+id/bottomAppbar"
         app:layout_anchorGravity="bottom|center"
@@ -151,10 +142,10 @@
 
     <Button
         android:id="@+id/send_button_chat_log"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_width="@dimen/activityChatlgW"
+        android:layout_height="@dimen/activityChatlgH"
+        android:layout_marginStart="@dimen/activityChatlgS"
+        android:layout_marginLeft="@dimen/activityChatlsleft"
         android:background="@drawable/message_send"
         app:backgroundTint="@color/black"
         app:layout_anchor="@+id/text_for_send"
@@ -162,25 +153,25 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppbar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
         android:layout_gravity="bottom"
         android:layout_weight="1"
         android:visibility="invisible"
         app:fabAlignmentMode="center" />
 
     <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/activityChatlinearW"
+        android:layout_height="@dimen/activityChatlinearH"
         android:layout_marginTop="200dp"
         android:layout_gravity="center_horizontal"
         >
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
-            android:layout_marginTop="50dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/pbTop"
+            android:layout_width="@dimen/pbW"
+            android:layout_height="@dimen/pbH"
             android:gravity="center_horizontal"
             android:progressDrawable="@drawable/circular_progress_bar" />
     </LinearLayout>

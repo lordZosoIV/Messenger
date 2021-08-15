@@ -8,11 +8,11 @@
 
     <TextView
         android:id="@+id/job_raw_search"
-        android:layout_width="180dp"
+        android:layout_width="@dimen/usersearchrowW"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="@dimen/usersearchrowms"
+        android:layout_marginLeft="@dimen/usersearchrowjpbml"
+        android:layout_marginBottom="@dimen/usersearchrowjobmb"
         android:fontFamily="sans-serif-light"
         android:gravity="top"
         android:textColor="@android:color/black"
@@ -23,12 +23,12 @@
 
     <TextView
         android:id="@+id/nickname_raw_search"
-        android:layout_width="180dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/usersearchrownickw"
+        android:layout_height="@dimen/usersearchrownickh"
+        android:layout_marginTop="@dimen/usersearchrowbucjmt"
         android:gravity="bottom"
         android:textColor="@android:color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/usersearchrownicktxtszie"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/job_raw_search"
         app:layout_constraintEnd_toEndOf="@+id/job_raw_search"
@@ -37,11 +37,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_search_raw_avatar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="@dimen/usersearchrowavatw"
+        android:layout_height="@dimen/usersearchrowavatH"
+        android:layout_marginStart="@dimen/usersearchrowavatms"
+        android:layout_marginLeft="@dimen/usersearchrowavatml"
+        android:layout_marginTop="@dimen/usersearchrowavatmt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

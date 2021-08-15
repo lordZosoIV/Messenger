@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="sign_page_textField_color">#F4F1F0</color>
     <color name="settings_color">#0000FF</color>
+    <color name="activityMainupdtBtnCol">#3F51B5</color>
+    <color name="activityMainsignTint">#F6F5F5</color>
+    <color name="acitivitSignUpupdateInfoTint">#3F51B5</color>
 </resources>
