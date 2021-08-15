@@ -67,6 +67,7 @@
         android:layout_marginTop="100dp"
         android:text="@string/sign_up_main"
         app:backgroundTint="#3F51B5"
+        app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="@+id/whatIDo"
         app:layout_constraintStart_toStartOf="@+id/whatIDo"
         app:layout_constraintTop_toBottomOf="@+id/user_job" />

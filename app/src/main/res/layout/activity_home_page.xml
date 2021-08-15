@@ -110,12 +110,14 @@
             app:reverseLayout="true" />
     </androidx.core.widget.NestedScrollView>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
         app:backgroundTint="@color/settings_color"
+        app:tint="@android:color/white"
         app:layout_anchor="@+id/bottomAppbar"
         android:src="@drawable/plus"
         app:layout_anchorGravity="top|center"/>
