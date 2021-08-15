@@ -5,7 +5,7 @@
     android:paddingLeft="100dp"
     android:paddingRight="100dp"
     android:paddingTop="100dp"
-        tools:context=".MainActivity"
+        tools:context=".mainPage.MainActivity"
     android:paddingBottom="100dp" >
 <!--    tools:context=".MainActivity">-->
 

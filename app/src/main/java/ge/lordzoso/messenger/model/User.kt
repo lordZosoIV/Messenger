@@ -1,4 +1,4 @@
-package ge.lordzoso.messenger
+package ge.lordzoso.messenger.model
 
 import android.os.Parcelable
 import androidx.versionedparcelable.VersionedParcelize

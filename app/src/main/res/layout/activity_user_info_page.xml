@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserInfoPageActivity">
+    tools:context=".userInfoPage.UserInfoPageActivity">
 
     <EditText
         android:id="@+id/person_name"
@@ -94,7 +94,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".HomePageActivity"
+            tools:context=".homePageActivity.HomePageActivity"
             android:id="@+id/main_layout"
             android:fitsSystemWindows="true">
 

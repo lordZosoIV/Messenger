@@ -11,20 +11,20 @@
         android:theme="@style/Theme.Messenger"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ChatActivity"
+            android:name=".chatPage.ChatActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".UserSearchActivity" />
-        <activity android:name=".UserInfoPageActivity" />
+        <activity android:name=".userInfoPage.UserInfoPageActivity" />
         <activity android:name=".LoadingActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".mainPage.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomePageActivity" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".homePageActivity.HomePageActivity" />
+        <activity android:name=".signUpPage.SignUpActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package ge.lordzoso.messenger
+package ge.lordzoso.messenger.model
 
 import android.app.Activity
 import android.os.AsyncTask
