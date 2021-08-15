@@ -115,11 +115,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
-        app:backgroundTint="@android:color/holo_blue_dark"
+        app:backgroundTint="@color/settings_color"
         app:layout_anchor="@+id/bottomAppbar"
         android:src="@drawable/plus"
-        app:layout_anchorGravity="top|center"
-        app:rippleColor="@android:color/holo_blue_bright" />
+        app:layout_anchorGravity="top|center"/>
 
 
 
