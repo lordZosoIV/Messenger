@@ -7,6 +7,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -130,6 +132,26 @@ class HomePageActivity : AppCompatActivity(), IHomePageActivityView {
                     true)
                 findViewById<ActionMenuItemView>(R.id.settings).visibility = View.INVISIBLE
                 return v?.onTouchEvent(event) ?: true
+            }
+        })
+
+        findViewById<TextView>(R.id.search_text).addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int,
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int,
+            ) {
+                findViewById<BottomAppBar>(R.id.bottomAppbar).visibility = View.INVISIBLE
+                findViewById<FloatingActionButton>(R.id.fab_button).visibility = View.INVISIBLE
+                findViewById<BottomAppBar>(R.id.bottomAppbar).navigationIcon?.setVisible(false,
+                    true)
+                findViewById<ActionMenuItemView>(R.id.settings).visibility = View.INVISIBLE
             }
         })
 
