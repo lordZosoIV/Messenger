@@ -9,10 +9,14 @@ import com.shashank.sony.fancytoastlib.FancyToast
 import ge.lordzoso.messenger.model.Message
 import ge.lordzoso.messenger.model.User
 import android.view.View
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.xwray.groupie.Item
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import de.hdodenhof.circleimageview.CircleImageView
+import ge.lordzoso.messenger.R
 import ge.lordzoso.messenger.chatPage.ChatActivity
-import java.util.Collections.list
+import ge.lordzoso.messenger.utils.Utils
 
 @Suppress("UNCHECKED_CAST")
 class HomePageInteractor(activity: HomePageActivity) {
@@ -82,7 +86,7 @@ class HomePageInteractor(activity: HomePageActivity) {
     val uniq = HashMap<String, Int>()
 
     private fun refreshRecyclerViewMessages(message: Message) {
-        view.refreshRecyclerViewMessages(latestMessagesMap)
+        view.refreshRecyclerViewMessages(latestMessagesMap, FirebaseAuth.getInstance().uid!!)
     }
 
     fun onRowItemClick(item: Item<GroupieViewHolder>, v: View) {
@@ -169,6 +173,25 @@ class HomePageInteractor(activity: HomePageActivity) {
             }
         })
     }
+
+    fun handleEachCHildNextActivity(uid: String, intent: Intent) {
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            @SuppressLint("CheckResult")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val targetUser = snapshot.getValue(User::class.java)!!
+                intent.putExtra(HomePageActivity.TARGET_USER, targetUser)
+                intent.putExtra(HomePageActivity.PREV_ACTIVITY, HomePageActivity.ACTIVITY)
+                view.startAct(intent)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+
 
 
 }

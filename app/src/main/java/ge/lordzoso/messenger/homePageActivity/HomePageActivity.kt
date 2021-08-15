@@ -1,6 +1,7 @@
 package ge.lordzoso.messenger.homePageActivity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -135,7 +136,7 @@ class HomePageActivity : AppCompatActivity(), IHomePageActivityView {
     }
 
 
-    override fun refreshRecyclerViewMessages(latestMessagesMap:HashMap<String, Message>) {
+    override fun refreshRecyclerViewMessages(latestMessagesMap:HashMap<String, Message>, currentUser: String) {
         adapter.clear()
         Loader().sleep(findViewById<ProgressBar>(R.id.progressBar))
         latestMessagesMap.values.forEach {
@@ -143,29 +144,19 @@ class HomePageActivity : AppCompatActivity(), IHomePageActivityView {
             adapter.setOnItemClickListener { item, view ->
                 val intent = Intent(view.context, ChatActivity::class.java)
                 val singleItem = item as LatestMessageRow
-                val currentUser = FirebaseAuth.getInstance().uid!!
                 val uid = if (currentUser == singleItem.message.from) {
                     singleItem.message.to
                 } else {
                     singleItem.message.from
                 }
-                val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+                presenter?.handleEachChildNextActivity(uid, intent)
 
-                ref.addListenerForSingleValueEvent(object : ValueEventListener {
-                    @SuppressLint("CheckResult")
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val targetUser = snapshot.getValue(User::class.java)!!
-                        intent.putExtra(TARGET_USER, targetUser)
-                        intent.putExtra(PREV_ACTIVITY, ACTIVITY)
-                        startActivity(intent)
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                    }
-
-                })
             }
         }
+    }
+
+    override fun startAct(intent: Intent) {
+        startActivity(intent)
     }
 
     private fun searchUserChat() {
@@ -229,40 +220,7 @@ class LatestMessageRow(val message: Message) :
 
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        val currentUser = FirebaseAuth.getInstance().uid!!
-        val uid = if (currentUser == message.from) {
-            message.to
-        } else {
-            message.from
-        }
-
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            @SuppressLint("CheckResult")
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val user = snapshot.getValue(User::class.java)!!
-                viewHolder.itemView.findViewById<TextView>(R.id.new_message_nickname).text =
-                    user.nickname.substring(
-                        0, user.nickname.indexOf(
-                            '@',
-                            0,
-                            false
-                        )
-                    )
-                viewHolder.itemView.findViewById<TextView>(R.id.new_message_msg).text = message.text
-                Glide.with(viewHolder.itemView.findViewById<CircleImageView>(R.id.new_message_avatar))
-                    .load(
-                        user.photoUrl
-                    ).into(viewHolder.itemView.findViewById(R.id.new_message_avatar))
-                val time = Utils().getTimeAgo(message.time)
-                viewHolder.itemView.findViewById<TextView>(R.id.new_message_time).text =
-                    time.toString()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
+        MBinder().bind(viewHolder, message)
 //        viewHolder.itemView.findViewById<TextView>(R.id.new_message_msg).text = chatMessage.text
     }
 

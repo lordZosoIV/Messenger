@@ -14,5 +14,6 @@ interface IHomePageActivityView {
     fun setAdapter()
     fun adapterSetListener(currentUser: String)
     fun putIntent(targetUser: User, intent: Intent)
-    fun refreshRecyclerViewMessages(latestMessagesMap: HashMap<String, Message>)
+    fun refreshRecyclerViewMessages(latestMessagesMap: HashMap<String, Message>, currentUser: String)
+    fun startAct(intent: Intent)
 }
